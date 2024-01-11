@@ -10,6 +10,8 @@ PORT = process.env.PORT || 4000
 //middle ware to parse json
 app.use(express.json());
 
+// Use cookie-parser middleware
+app.use(cookieParser());
 
 const connectDb = require('./config/database');
 connectDb.connect();
