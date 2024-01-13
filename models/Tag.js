@@ -14,11 +14,14 @@ const tagSchema =  new mongoose.Schema({
     trim:true
 
    },
-
-   course:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:"Course"
-   }
+   //its array bcuz one tag can be alloted to many course
+   //ex: python tag ke ek se jyada course ho sakte hai
+   course:[
+      {
+         type:mongoose.Schema.Types.ObjectId,
+         ref:"Course"
+        }
+   ]
 
 })
 

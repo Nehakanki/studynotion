@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const SubSectionSchema = new mongoose.Schema({
 
-    Title:{
+    title:{
         type:String,
         required:true,
         trim: true
