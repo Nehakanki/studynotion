@@ -59,7 +59,7 @@ exports.createSubsection = async (req,res)=>{
 
 }
 
-
+//updating the subsection
 exports.updateSubsection = async (req,res)=>{
     try{
         //to update the subsection ki id is required
@@ -106,6 +106,7 @@ exports.updateSubsection = async (req,res)=>{
 
     }
 }
+//deleting the subsection Part
 
 
 exports.deleteSubsection = async(req,res)=>{
