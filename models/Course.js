@@ -44,10 +44,14 @@ const CourseSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    tags:{
+        type:[String],
+        required:true
+    },
 
-    Tag:{
+    Category:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"Tag",
+        ref:"Category",
         required:true
        
 
@@ -60,7 +64,15 @@ const CourseSchema = new mongoose.Schema({
 
 
         }
-    ]
+    ],
+    instructions:{
+        type:[String],
+
+    },
+    status:{
+        type:String,
+        enum : ["drafted","Published"]
+    }
 
 
 })

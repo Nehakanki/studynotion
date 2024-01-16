@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const tagSchema =  new mongoose.Schema({
+const CategorySchema =  new mongoose.Schema({
 
    name:{
     type:String,
@@ -14,8 +14,8 @@ const tagSchema =  new mongoose.Schema({
     trim:true
 
    },
-   //its array bcuz one tag can be alloted to many course
-   //ex: python tag ke ek se jyada course ho sakte hai
+   //its array bcuz one Category can be alloted to many course
+   //ex: python Category ke ek se jyada course ho sakte hai
    course:[
       {
          type:mongoose.Schema.Types.ObjectId,
@@ -25,4 +25,4 @@ const tagSchema =  new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model("Tag",tagSchema )
+module.exports = mongoose.model("Category",CategorySchema )

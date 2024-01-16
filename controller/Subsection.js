@@ -1,7 +1,7 @@
 const SubSection = require('../models/SubSection');
 const Section = require('../models/Section');
 const { uploadImageToCloudinary } = require('../utils/imageUploader');
-const { findByIdAndUpdate, findByIdAndDelete } = require('../models/Tag');
+const { findByIdAndUpdate, findByIdAndDelete } = require('../models/Category');
 
 require('dotenv').config();
 

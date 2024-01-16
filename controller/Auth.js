@@ -133,7 +133,7 @@ exports.signUp = async (req, res) => {
     //7. Hash the password and Enter into Db
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    //8. Entry in Db
+    //8. Entry in Db (after this updation done in Profile Schema in profile controller logic is here)
     const profileDetails = await Profile.create({
       gender: null,
       DOB: null,
