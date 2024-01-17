@@ -6,6 +6,10 @@ const Rating_ReviewSchema = new mongoose.Schema({
         ref:"User"
     },
 
+    course: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Course"
+    },
     rating:{
         type:Number,
         required : true,
