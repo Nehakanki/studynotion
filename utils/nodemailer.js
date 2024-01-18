@@ -1,26 +1,33 @@
 const nodemailer = require("nodemailer");
-require('dotenv').config
+require('dotenv').config();
 exports.mailSender = async(email, title, body)=>{
 
     try{
         const transporter = nodemailer.createTransport({
             host: process.env.MAIL_HOST,
-           
+            service: 'gmail',
             secure: true,
             auth: {
            
               user: process.env.MAIL_USER,
               pass: process.env.MAIL_PASS
             },
+            
+    tls: {
+        rejectUnauthorized: false
+    },
+    debug: true
+
+
           });
           
 
           const info = await transporter.sendMail({
             from: "StudyNotion",
-            to: `${email}`,
-            subject:`${title}`,
+            to: email,
+            subject:title,
         
-            html: `${body}`
+            html: body
           });
           console.log(info);
 

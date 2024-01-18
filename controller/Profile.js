@@ -7,11 +7,12 @@ exports.UpdateProfile = async (req,res)=>{
     try{
          //get values
             // const {gender="" ,DOB="", about,ContactNumber } = req.body; --->sir code
-                const {gender ,DOB, about,ContactNumber } = req.body;
+                const {gender,DOB, about,ContactNumber } = req.body;
                 //get User Id 
                 //so if the user is logged in (means it has token ) and that token value we inserted into req,user so that we can easily decode the userID
 
-                const id = req.user.id;
+                const id = req.user.id.toString();
+
                 if(!gender || !DOB ||
                     !about||!ContactNumber|| !id){
                         return res.status(403).json({
@@ -20,9 +21,10 @@ exports.UpdateProfile = async (req,res)=>{
                         })
                     }
 
-                //find profile id
+                //find profile id   
+                
 
-                const userDetails = await User.findById({id});
+                const userDetails = await User.findById(id);
                 const profileID=  userDetails.additonalDetails;
                 const profileDetails = await Profile.findById(profileID); 
 
@@ -111,11 +113,12 @@ exports.getAllUserDetails = async(req,res)=>{
         const id = req.user.id;
         //validate & getDetails
 
-        const userDetails = await User.findById(id).populate("additionalDetails").exec();
+        const userDetails = await User.findById(id).populate("additonalDetails").exec();
         //populate to get all the entries
         return res.status(200).json({
             success:true,
-            message:"User Data FOund"
+            message:"User Data FOund",
+            userDetails
         })
     }catch(error){
         return res.status(500).json({

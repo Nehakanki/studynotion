@@ -1,15 +1,18 @@
 const User = require("../models/User");
-const OTP = require("../models/OTP");
-const otp_generator = require("otp-generator");
+const { OTP, sendVerificationEmail } = require("../models/OTP")
+
+const otpGenerator = require("otp-generator");
+
+const Profile = require('../models/Profile')
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
-const { mailSender } = require("../utils/nodemailer");
+const  mailSender  = require("../utils/nodemailer");
 require("dotenv").config();
 
 // OTP 
 
-exports.OTPGenerator = async (req, res) => {
+exports.sendOTP = async (req, res) => {
   try {
     //fetch email from the user Body
     const { email } = req.body;
@@ -27,7 +30,7 @@ exports.OTPGenerator = async (req, res) => {
     }
     //generated the OTP using the otp_generator library
 
-    let otp = otp_generator(6, {
+    let otp = otpGenerator.generate(6, {
       upperCaseAlphabets: false,
       lowerCaseAlphabets: false,
       specialChars: false,
@@ -36,7 +39,7 @@ exports.OTPGenerator = async (req, res) => {
     let check_unique_otp = await OTP.findOne({ otp });
     //check everytime unique OTP is generated
     while (check_unique_otp) {
-      let otp = otp_generator(6, {
+      let otp = otpGenerator.generate(6, {
         upperCaseAlphabets: false,
         lowerCaseAlphabets: false,
         specialChars: false,
@@ -121,12 +124,12 @@ exports.signUp = async (req, res) => {
       //OTP not found
       return res.status(400).json({
         success: false,
-        message: "Invalid OTP",
+        message: "Invalid OTP length 0",
       });
-    } else if (recent_otp !== otp) {
+    } else if (recent_otp[0].otp !== otp) {
       return res.status(400).json({
         success: false,
-        message: "Invalid OTP",
+        message: "Invalid OTP ",
       });
     }
 
@@ -135,10 +138,10 @@ exports.signUp = async (req, res) => {
 
     //8. Entry in Db (after this updation done in Profile Schema in profile controller logic is here)
     const profileDetails = await Profile.create({
-      gender: null,
-      DOB: null,
-      about: null,
-      ContactNumber: null,
+      gender: "",
+      DOB:"",
+      about: "",
+      ContactNumber: "",
     });
 
     const user = await User.create({
@@ -231,7 +234,7 @@ exports.login = async (req, res) => {
 
 //change Password
 
-exports.resetPassword = async (req, res) => {
+exports.changePassword = async (req, res) => {
   //get data from req body
   const { email } = req.body;
   const user = await User.findOne({ email });
@@ -245,7 +248,7 @@ exports.resetPassword = async (req, res) => {
 
   //get old & new password , confirm password
 
-  function newPassword(password) {
+  function validatePassword(password) {
     if (password.length < 8) {
       console.log("enter min 8 length password");
       return false;
@@ -284,10 +287,11 @@ exports.resetPassword = async (req, res) => {
 
   //validation
   try {
-    if (validatePassword(newPassword)) {
+    // if (validatePassword(newPassword)) {
+      if (validatePassword(newPassword)) {
       console.log("Password is valid.");
       if (newPassword === confirmPassword) {
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        const hashedPassword = await  bcrypt.hash(newPassword, 10);
 
         //update the password in DB after hashing it
         user.password = hashedPassword;

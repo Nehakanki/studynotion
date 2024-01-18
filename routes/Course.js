@@ -9,7 +9,7 @@ const {auth, isInstructor , isStudent , isAdmin} = require('../middlewares/auth'
 ///------------CATEGORY-------------//
 const {createCategory ,showAllCategories, categoryPageDetails} = require('../controller/Category');
 
-router.get('/showAllCategories',showAllCategories );
+router.get('routes/Course.js',showAllCategories );
 
 router.post('/createCategory',auth,isAdmin,createCategory)
 //2 routes remaing

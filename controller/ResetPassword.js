@@ -1,8 +1,8 @@
 const User = require("../models/User");
 
-const mailSender = require("../utils/nodemailer");
+const {mailSender} = require("../utils/nodemailer");
 const bcrypt = require("bcrypt");
-
+const crypto = require('crypto')
 
 //reset password token
 
@@ -10,7 +10,7 @@ exports.resetPasswordToken = async (req, res) => {
   try {
     //1. get email
 
-    const email = req.body;
+    const {email} = req.body;
     //2. check user for email
     const user = await User.findOne({ email: email });
     if (!user) {

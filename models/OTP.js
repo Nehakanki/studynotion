@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const {mailSender} = require('../utils/nodemailer');
 
 const OTPSchema =  new mongoose.Schema({
 
@@ -31,10 +32,23 @@ async function sendVerificationEmail(email,otp){
 
 }
 
-OTPSchema.pre("save",async function(next){
-    await sendVerificationEmail(this.email, this.otp);
-    next();
-})
+// OTPSchema.pre("save", async function (next) {
+//     try {
+//         await sendVerificationEmail(this.email, this.otp);
+//         next();
+//     } catch (err) {
+//         console.log("Error occurred while sending mail: " + err);
+//         next(err);
+//     }
+// });
 
+OTPSchema.pre("save", function (next) {
+    sendVerificationEmail(this.email, this.otp)
+        .then(() => next())
+        .catch(err => next(err));
+});
 
-module.exports = mongoose.model("OTP", OTPSchema)
+module.exports = {
+    OTP: mongoose.model("OTP", OTPSchema),
+    sendVerificationEmail
+ };

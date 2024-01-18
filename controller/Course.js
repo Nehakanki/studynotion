@@ -92,3 +92,48 @@ exports.createCourse = async(req,res)=>{
         
     }
 }
+
+
+// get all Courses is remaining
+
+exports.getCourseDetails = async (req,res)=>{
+    try{
+        const {courseId} = req.body;
+        //to find course details
+        const courseDetails = await Course.find({_id:courseId}).populate({
+            path: "instructor",
+            populate:{
+                path:"additonalDetails",
+            },
+        }).populate("Category").populate("Rating_review")
+        .populate({
+            path:"courseContent",
+            populate:{
+                path:"SubSection"
+            }
+        }).exec();
+
+        //validation
+        if(!courseDetails){
+            return res.status(400).json({
+                success:false,
+                message:"Could not find with the course with courseID"
+            });
+
+        }
+
+        return res.status(200).json({
+            success:true,
+            message:"COurse detail fetch successfully"
+        })
+
+    }catch(error){
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:error.message
+        });
+
+
+    }
+}
