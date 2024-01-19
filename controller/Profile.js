@@ -63,7 +63,7 @@ exports.UpdateProfile = async (req,res)=>{
 
 }
 
-//HW
+
 exports.deleteProfile = async(req,res)=>{
     try{
         //get id 
@@ -82,7 +82,7 @@ exports.deleteProfile = async(req,res)=>{
           await Profile.findByIdAndDelete({_id:userDetails.additonalDetails});
 
 
-          //HWW
+          
           
         //delete from the EnrolledCOurses section 
         //just update the array
