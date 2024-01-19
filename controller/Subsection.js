@@ -1,26 +1,40 @@
 const SubSection = require('../models/SubSection');
 const Section = require('../models/Section');
-const { uploadImageToCloudinary } = require('../utils/imageUploader');
-const { findByIdAndUpdate, findByIdAndDelete } = require('../models/Category');
+
+const cloudinary = require('cloudinary').v2;
 
 require('dotenv').config();
+
+
+async function uploadToCloudinary(file,folder, quality){
+    const options ={folder};
+    console.log("temp file path", file.tempFilePath);
+
+    if(quality){
+        options.quality= quality;
+    }
+
+    options.resource_type="auto"; //imp part
+    return await cloudinary.uploader.upload(file.tempFilePath, options);
+}
+
 
 exports.createSubsection = async (req,res)=>{
    try{
         const {title, timeDuration, description,section_id }= req.body;
 
-        const video = req.files.videoFiles;
+        const video = req.files.video;
 
         //validation
 
-        if(!title || !timeDuration || !description ||!section_id ||!video){
+        if(!title || !timeDuration || !description ||!section_id ){
             return res.json({
                 success:false,
                 message:'Enter  all the details specially section_Id'
             })
         }
         //upload video to cloudinary
-        const uploadVideo = await uploadImageToCloudinary(video, process.env.FOLDER_NAME);
+        const uploadVideo = await uploadToCloudinary(video, process.env.FOLDER_NAME);
 
 //create the subsection
 
@@ -32,7 +46,7 @@ exports.createSubsection = async (req,res)=>{
     })
 
     //update into the section
-    const updatedSection = await findByIdAndUpdate({_id:section_id},
+    const updatedSection = await Section.findByIdAndUpdate(section_id,
         {
             $push:{
                 SubSection:newSubsection._id,
@@ -74,11 +88,11 @@ exports.updateSubsection = async (req,res)=>{
             })
         }
         //upload video to cloudinary
-        const uploadVideo = await uploadImageToCloudinary(video, process.env.FOLDER_NAME);
+        const uploadVideo = await uploadToCloudinary(video, process.env.FOLDER_NAME);
 
         //update the subsection
 
-        const updatedSubsection = await findByIdAndUpdate({_id:subsection_id},
+        const updatedSubsection = await Subsection.findByIdAndUpdate({_id:subsection_id},
             {
                 title:title,
                 timeDuration:timeDuration,

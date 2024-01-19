@@ -12,6 +12,7 @@ const {createCategory ,showAllCategories, categoryPageDetails} = require('../con
 router.get('routes/Course.js',showAllCategories );
 
 router.post('/createCategory',auth,isAdmin,createCategory)
+
 //2 routes remaing
 
 
@@ -36,6 +37,7 @@ router.post("/deleteSubSection", auth, isInstructor,deleteSubsection);
 const {createCourse,getCourseDetails } = require('../controller/Course')
 
 router.post('/createCourse', auth , isInstructor, createCourse);
+router.post('/getCourseDetails', getCourseDetails);
 
 
 

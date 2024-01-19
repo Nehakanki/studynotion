@@ -1,6 +1,10 @@
 const User = require('../models/User');
 const Profile = require('../models/Profile');
-const Course = require('../controller/Course')
+const Course = require('../controller/Course');
+const { json } = require('express');
+
+const cloudinary = require('cloudinary').v2;
+
 
 exports.UpdateProfile = async (req,res)=>{
    
@@ -125,5 +129,50 @@ exports.getAllUserDetails = async(req,res)=>{
             success:false,
             message:error.message
         })
+    }
+}
+async function uploadToCloudinary(file,folder, quality){
+    const options ={folder};
+    console.log("temp file path", file.tempFilePath);
+
+    if(quality){
+        options.quality= quality;
+    }
+
+    options.resource_type="auto"; //imp part
+    return await cloudinary.uploader.upload(file.tempFilePath, options);
+}
+
+exports.updateProfileImagee = async (req,res)=>{
+    try{
+        const id = req.user.id;
+        const image = req.files.image;
+        console.log("Profile Image",image);
+       const updatedImage = await uploadToCloudinary(image,process.env.FOLDER_NAME);
+       console.log(updatedImage)
+       
+        const updateProfileImage = await User.findByIdAndUpdate(id,
+            {
+                $set :{
+                    image: updatedImage.secure_url,
+                }
+            },{new:true});
+
+        console.log(updateProfileImage);
+
+        return res.status(200).json({
+            success:true,
+            message:"Image Updated Successfully",
+            data: updateProfileImage
+        })
+
+
+    }catch(error){
+
+        return res.status(404).json({
+            success:false,
+            message:error.message
+        })
+
     }
 }

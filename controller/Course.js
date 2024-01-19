@@ -1,20 +1,38 @@
 const Course = require('../models/Course');
 const User = require('../models/User');
 const Category = require('../models/Category');
-const { uploadImageToCloudinary } = require('../utils/imageUploader');
+
+const cloudinary = require('cloudinary').v2;
+
+// const { uploadImageToCloudinary } = require('../utils/imageUploader');
 
 //create course function
 
 exports.createCourse = async(req,res)=>{
+
+    async function uploadToCloudinary(file,folder, quality){
+        const options ={folder};
+        console.log("temp file path", file.tempFilePath);
+    
+        if(quality){
+            options.quality= quality;
+        }
+    
+        options.resource_type="auto"; //imp part
+        return await cloudinary.uploader.upload(file.tempFilePath, options);
+    }
+    
     try{
-        const   {courseName,courseDescription,whatWillWeLearn, price,category} = req.body;//Category id is passed
+        const   {courseName,courseDescription,whatWillWeLearn,tags ,price,category} = req.body;//Category id is passed
         //get thumbnail
 
-        const thumbnail = req.files.thumbnailImage;
+        const thumbnail = req.files.thumbnail;
+        console.log("Thumbnail")
+        console.log(thumbnail)
 
         //simple validation
         if(!courseName ||
-            !courseDescription|| !whatWillWeLearn||  !price|| !category){
+            !courseDescription|| !whatWillWeLearn|| !price|| !category ){
                 return res.status(403).json({
                     success:false,
                     message:"Enter all required details"
@@ -24,10 +42,14 @@ exports.createCourse = async(req,res)=>{
 
         //instructor validation
         const userID = req.user.id;
+        console.log(userID)
 
-
+        
         //valid Category
-        const CategoryDetails =await Category.findById(Category);
+        console.log("category", category)
+        const CategoryDetails = await Category.findById(category);
+        console.log("category detail",CategoryDetails)
+
         if(!CategoryDetails){
             return res.status(403).json({
             success:false,
@@ -37,21 +59,27 @@ exports.createCourse = async(req,res)=>{
         
 
         //upload image into cloudinary
+        //upload to cloudinary
 
-        const thumbnailImage = await uploadImageToCloudinary(thumbnail, process.env.FOLDER_NAME)
 
+        const thumbnailImage = await uploadToCloudinary(thumbnail, process.env.FOLDER_NAME)
+        console.log(thumbnailImage);
+        
         //create entry into DB
+        console.log("enrtry cration start")
         const newCourse = await Course.create({
             courseName,
             courseDescription,
             instructor:userID,
             whatWillWeLearn,
             price,
-            Category:CategoryDetails._id,
+            tags,
+            Category:category,
             thumbnail : thumbnailImage.secure_url,
             
 
         })
+        console.log("entry complete")
         console.log(newCourse);
 
         //add the new course into the user SChema of the instructor
@@ -63,16 +91,17 @@ exports.createCourse = async(req,res)=>{
             },{new:true});
 
         //upadate the Category schema
-
-        await Category.findByIdAndUpdate({_id:Category},
+            console.log("category ID", category)
+        await Category.findByIdAndUpdate(category,
             {
                 $push:{
-                    course:newCourse._id,
+                    course: newCourse._id
 
                 }
             },
             {new:true});
-
+        
+        
 
 
 
@@ -84,7 +113,7 @@ exports.createCourse = async(req,res)=>{
 
 
     }catch(error){
-        console.log("error while creating the course");
+        console.log("error while creating the course"+error);
         return res.status(403).json({
             success:false,
             message:error.message
@@ -124,7 +153,8 @@ exports.getCourseDetails = async (req,res)=>{
 
         return res.status(200).json({
             success:true,
-            message:"COurse detail fetch successfully"
+            message:"COurse detail fetch successfully",
+            courseDetails
         })
 
     }catch(error){
