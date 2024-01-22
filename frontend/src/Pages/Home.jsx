@@ -5,6 +5,8 @@ import HighlightText from "../components/core/HomePag/HighlightText";
 import CTAButton from "../components/core/HomePag/CTAButton";
 import banner from "../assests/banner/home.mp4";
 import CodeBlocks from "../components/core/HomePag/CodeBlocks";
+import LearningLanguageSection from '../components/core/HomePag/LearningLanguageSection'
+import TimelineSection from "../components/core/HomePag/TimelineSection";
 
 const Home = () => {
   return (
@@ -100,7 +102,7 @@ const Home = () => {
               active: false,
             }}
             codeblock={`<!DOCTYPE html>\n<html>\nhead><body>Example</body>title><linkrel="stylesheet"href="styles.css">\n/head>\nbody>\nh1><ahref="/">Header</a>\nnav><ahref="one/">One</a><ahref="two/">Two</a><ahref="three/">Three</a>\n/nav>`}
-            codeColor={"text-yellow-25"}
+           codeColor={"text-yellow-25"}
           />
         </div>
 
@@ -108,8 +110,81 @@ const Home = () => {
 
 
       </div>
-
       {/* section2 */}
+      <div className='bg-pure-greys-5 text-richblack-700'>
+            <div className="homepage_bg h-[310px] ">
+              <div className="  max-auto  max-w-maxContent flex flex-col items-center gap-5">
+                  <div className="h-[150px]"></div>
+                <div className="flex gap-7 text-white ">
+                  <CTAButton active={true} linkto={'/signup'}>
+                    <div className="flex items-center gap-3">
+                      Explore Full Catalog
+                      <FaArrowRight/>
+                    </div>
+                  </CTAButton>
+                  <CTAButton active={false} linkto={'/signup'}>
+                   
+                      Learn more
+                     
+                   
+                  </CTAButton>
+                </div>
+              </div>
+
+            </div>
+
+            <div className='mx-auto w-11/12 flex  justify-between gap-10'>
+              <div className="flex gap-10 justify-between items-center">
+
+                <div className="text-4xl font-semibold font-calibari w-[60%]">
+                  Get the Skills you need  for a 
+                  <HighlightText text={"Job that is in demand"}/>
+                  </div>
+
+                <div>
+
+                <div className="flex flex-col gap-10 w-[90%] justify-center items-start ml-5 m-4 p-8  ">
+                    <div className="font-calibari text-left font-2xl font-semibold pl-6 " >
+                   ` The modern StudyNotion is the dictates its own terms. Today, to be
+                     a competitive specialist requires more than professional skills.`
+                    </div>
+                    <div className="w-[30%] pl-6 ">
+                      <CTAButton active={true} linkto={'/signup'}>
+                        Learn more
+
+                      </CTAButton>
+                    </div>
+                </div>
+
+              
+              </div>
+            
+
+
+              </div>
+
+      
+            </div>
+
+            <div className="w-11/12 mx-auto flex justify-between items-center gap-10">
+                                    
+                                    <div className=" pl-20">
+                                    <TimelineSection/>
+                                    </div>
+          
+                                    
+          
+            </div>
+
+            <div>
+            <LearningLanguageSection/>
+            </div>
+          
+
+
+  
+
+        </div>
 
       {/* Section 3 */}
 
