@@ -7,8 +7,8 @@ import banner from "../assests/banner/home.mp4";
 import CodeBlocks from "../components/core/HomePag/CodeBlocks";
 import LearningLanguageSection from "../components/core/HomePag/LearningLanguageSection";
 import TimelineSection from "../components/core/HomePag/TimelineSection";
-import calender from "../assests/logos/Calender.jpg";
 import section3Img from "../assests/banner/section-3.png";
+import ExploreMore from "../components/core/HomePag/ExploreMore";
 
 const Home = () => {
   return (
@@ -24,11 +24,11 @@ const Home = () => {
           </div>
         </Link>
 
-        <div className="flex  text-pure-greys-25 text-center text-4xl font-semibold font-calibari">
+        <div className=" sm:flex sm:flex-row sm:text-4xl flex-col text-pure-greys-25 text-center text-3xl font-semibold font-calibari ">
           Empower Your Future with
           <HighlightText text={"Coding Skills"} />
         </div>
-        <div className="text-richblack-200  w-[70%] text-center text-lg font-calibari ">
+        <div className="text-richblack-200  w-[70%] text-justify text-lg font-calibari ">
           With our online coding courses, you can learn at your own pace, from
           anywhere in the world, and get access to a wealth of resources,
           including hands-on projects, quizzes, and personalized feedback from
@@ -52,7 +52,7 @@ const Home = () => {
         {/* code section 1 */}
         <div>
           <CodeBlocks
-            postion={"lg:flex-row"}
+            postion={"flex-row flex flex-col mx-auto"}
             heading={
               <div className="text-4xl font-semibold">
                 Unlock Your
@@ -73,7 +73,7 @@ const Home = () => {
               linkto: "/login",
               active: false,
             }}
-            codeblock={`<!DOCTYPE html>\n<html>\nhead><body>Example</body>title><linkrel="stylesheet"href="styles.css">\n/head>\nbody>\nh1><ahref="/">Header</a>\nnav><ahref="one/">One</a><ahref="two/">Two</a><ahref="three/">Three</a>\n/nav>`}
+            codeblock={`<!DOCTYPE html>\n<html>\nhead><body>Example</body>\ntitle>\n/head>\nbody>\nh1><ahref="/">Header</a>\nnav><ahref="one/">One</a><ahref="two/">Two</a><ahref="three/">Three</a>\n/nav>`}
             codeColor={"text-yellow-25"}
           />
         </div>
@@ -81,7 +81,7 @@ const Home = () => {
         {/* Code block section 2 */}
         <div>
           <CodeBlocks
-            postion={"lg:flex-row-reverse"}
+            postion={"flex-row-reverse"}
             heading={
               <div className="text-4xl font-semibold">
                 Start
@@ -100,11 +100,12 @@ const Home = () => {
               linkto: "/login",
               active: false,
             }}
-            codeblock={`<!DOCTYPE html>\n<html>\nhead><body>Example</body>title><linkrel="stylesheet"href="styles.css">\n/head>\nbody>\nh1><ahref="/">Header</a>\nnav><ahref="one/">One</a><ahref="two/">Two</a><ahref="three/">Three</a>\n/nav>`}
+            codeblock={`<!DOCTYPE html>\n<html>\nhead><body>Example</body>title>\n/head>\nbody>\nh1><ahref="/">Header</a>\nnav><ahref="one/">One</a><ahref="two/">Two</a><ahref="three/">Three</a>\n/nav>`}
             codeColor={"text-yellow-25"}
           />
         </div>
       </div>
+      <ExploreMore/>
       {/* section2 */}
       <div className="bg-pure-greys-5 text-richblack-700">
         <div className="homepage_bg  w-11/12 mx-auto max-w-maxContent h-[310px] ">
@@ -125,20 +126,21 @@ const Home = () => {
         </div>
 
         <div className="mx-auto w-11/12 max-w-maxContent   flex justify-between gap-10">
-          <div className="flex gap-10 justify-between items-center">
-            <div className="text-4xl font-semibold font-calibari w-[60%]">
+          <div className="sm:flex sm:gap-10 sm:w-11/12 sm:max-w-maxContent  sm:justify-between sm:items-center flex flex-col">
+          
+            <div className="sm:text-4xl font-semibold font-calibari  text-3xl mx-auto">
               Get the Skills you need for a
               <HighlightText text={"Job that is in demand"} />
             </div>
 
             <div>
-              <div className="flex flex-col gap-10 w-[90%] justify-center items-start ml-5 m-4 p-8  ">
+              <div className="flex flex-col sm:gap-10  sm:justify-center sm:items-start sm:ml-5 sm:m-4 sm:p-8 m-4 gap-7 mx-auto  ">
                 <div className="font-calibari text-left font-2xl font-semibold pl-6 ">
                   ` The modern StudyNotion is the dictates its own terms. Today,
                   to be a competitive specialist requires more than professional
                   skills.`
                 </div>
-                <div className="w-[30%] pl-6 ">
+                <div className="sm:pl-6  mx-auto  pl-10 ">
                   <CTAButton active={true} linkto={"/signup"}>
                     Learn more
                   </CTAButton>
@@ -148,17 +150,17 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="w-11/12 mx-auto max-w-maxContent flex justify-between items-center gap-10">
-          <div className=" pl-20">
+        <div className="sm:w-11/12 sm:mx-auto sm:max-w-maxContent sm:flex sm:justify-between sm:items-center sm:gap-10 flex flex-col">
+          <div className=" sm:pl-20 mx-auto pl-7">
             <TimelineSection />
           </div>
         </div>
 
-        <div className=" mx-auto max-w-maxContent flex items-center gap-9 w-11/12 pl-7">
+        <div className=" mx-auto max-w-maxContent flex items-center gap-9 w-11/12 sm:pl-7 ">
           <LearningLanguageSection />
         </div>
       </div>
-
+        
       {/* Section 3 */}
       <div className="flex mx-auto w-11/12 max-w-maxContent gap-28 items-center font-calibari text-pure-greys-25 ">
         <div>

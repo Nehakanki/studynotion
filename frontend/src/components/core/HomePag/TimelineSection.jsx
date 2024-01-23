@@ -33,17 +33,17 @@ const timeline =[
 ]
 const TimelineSection = () => {
   return (
-    <div>
-      <div className='flex gap-20 items-center'>
-        <div className='w-[100%] flex flex-col'>
+    <div className='sm:flex sm:flex-row font-calibari'>
+      {/* cureent chnage */}
+      <div className='sm:flex sm:flex-row flex flex-col'>
+        <div className='w-[100%] flex flex-col sm:gap-5 gap-3'>
           {timeline.map((element, index) => (
-            <div className='flex pl-8' key={index}>
+            <div className='sm:flex sm:flex-row flex font-calibri sm:pl-8 pl-2' key={index}>
               <div className='w-[38px] h-[40px] bg-white flex items-center pl-18 rounded-s-full'>
                 <img src={element.Logo} alt="logo" loading='lazy' className='pl-1'/>
               </div>
-              |
-              |
-              <div className='w-[100%] pl-4'>
+             
+              <div className='sm:w-[100%] sm:pl-4 pl-2'>
                 <h2 className='font-calibri font-semibold text-[18px]'>
                   {element.heading}
                 </h2>
@@ -51,7 +51,8 @@ const TimelineSection = () => {
               </div>
             </div>
           ))}
-        </div>
+        </div> 
+        {/* all logos */}
 
         <div className='relative shadow-blue-200 w-[85%] pl-10'>
           <img src={timelineImage} alt="image" className='shadow-white object-cover h-fit'/>
