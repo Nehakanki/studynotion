@@ -5,9 +5,10 @@ import HighlightText from "../components/core/HomePag/HighlightText";
 import CTAButton from "../components/core/HomePag/CTAButton";
 import banner from "../assests/banner/home.mp4";
 import CodeBlocks from "../components/core/HomePag/CodeBlocks";
-import LearningLanguageSection from '../components/core/HomePag/LearningLanguageSection'
+import LearningLanguageSection from "../components/core/HomePag/LearningLanguageSection";
 import TimelineSection from "../components/core/HomePag/TimelineSection";
-import calender from "../assests/logos/Calender.jpg"
+import calender from "../assests/logos/Calender.jpg";
+import section3Img from "../assests/banner/section-3.png";
 
 const Home = () => {
   return (
@@ -83,15 +84,12 @@ const Home = () => {
             postion={"lg:flex-row-reverse"}
             heading={
               <div className="text-4xl font-semibold">
-                Start 
-                <HighlightText text={"coding in seconds"}></HighlightText> 
-              
+                Start
+                <HighlightText text={"coding in seconds"}></HighlightText>
               </div>
             }
-            subheading={
-                `Go ahead, give it a try. Our hands-on learning environment means
-                you'll be writing real code from your very first lesson.`
-            }
+            subheading={`Go ahead, give it a try. Our hands-on learning environment means
+                you'll be writing real code from your very first lesson.`}
             ctabn1={{
               btnText: "Go to lessons",
               linkto: "/signup",
@@ -103,93 +101,93 @@ const Home = () => {
               active: false,
             }}
             codeblock={`<!DOCTYPE html>\n<html>\nhead><body>Example</body>title><linkrel="stylesheet"href="styles.css">\n/head>\nbody>\nh1><ahref="/">Header</a>\nnav><ahref="one/">One</a><ahref="two/">Two</a><ahref="three/">Three</a>\n/nav>`}
-           codeColor={"text-yellow-25"}
+            codeColor={"text-yellow-25"}
           />
         </div>
-
-
-
-
       </div>
       {/* section2 */}
-      <div className='bg-pure-greys-5 text-richblack-700'>
-            <div className="homepage_bg  w-11/12 mx-auto max-w-maxContent h-[310px] ">
-              <div className="  max-auto  max-w-maxContent flex flex-col items-center gap-5">
-                  <div className="h-[150px]"></div>
-                <div className="flex gap-7 text-white ">
-                  <CTAButton active={true} linkto={'/signup'}>
-                    <div className="flex items-center gap-3">
-                      Explore Full Catalog
-                      <FaArrowRight/>
-                    </div>
-                  </CTAButton>
-                  <CTAButton active={false} linkto={'/signup'}>
-                   
-                      Learn more
-                     
-                   
-                  </CTAButton>
+      <div className="bg-pure-greys-5 text-richblack-700">
+        <div className="homepage_bg  w-11/12 mx-auto max-w-maxContent h-[310px] ">
+          <div className="  max-auto  max-w-maxContent flex flex-col items-center gap-5">
+            <div className="h-[150px]"></div>
+            <div className="flex gap-7 text-white ">
+              <CTAButton active={true} linkto={"/signup"}>
+                <div className="flex items-center gap-3">
+                  Explore Full Catalog
+                  <FaArrowRight />
                 </div>
-              </div>
-
+              </CTAButton>
+              <CTAButton active={false} linkto={"/signup"}>
+                Learn more
+              </CTAButton>
             </div>
-
-            <div className='mx-auto w-11/12 max-w-maxContent   flex justify-between gap-10'>
-              <div className="flex gap-10 justify-between items-center">
-
-                <div className="text-4xl font-semibold font-calibari w-[60%]">
-                  Get the Skills you need  for a 
-                  <HighlightText text={"Job that is in demand"}/>
-                  </div>
-
-                <div>
-
-                <div className="flex flex-col gap-10 w-[90%] justify-center items-start ml-5 m-4 p-8  ">
-                    <div className="font-calibari text-left font-2xl font-semibold pl-6 " >
-                   ` The modern StudyNotion is the dictates its own terms. Today, to be
-                     a competitive specialist requires more than professional skills.`
-                    </div>
-                    <div className="w-[30%] pl-6 ">
-                      <CTAButton active={true} linkto={'/signup'}>
-                        Learn more
-
-                      </CTAButton>
-                    </div>
-                </div>
-
-              
-              </div>
-            
-
-
-              </div>
-
-      
-            </div>
-
-            <div className="w-11/12 mx-auto max-w-maxContent flex justify-between items-center gap-10">
-                                    
-                                    <div className=" pl-20">
-                                    <TimelineSection/>
-                                    </div>
-          
-                                    
-          
-            </div>
-
-            <div className=" mx-auto max-w-maxContent flex items-center gap-9 w-11/12 pl-7">
-            <LearningLanguageSection/>
-            </div>
-          
-
-
-  
-
+          </div>
         </div>
 
-      {/* Section 3 */}
+        <div className="mx-auto w-11/12 max-w-maxContent   flex justify-between gap-10">
+          <div className="flex gap-10 justify-between items-center">
+            <div className="text-4xl font-semibold font-calibari w-[60%]">
+              Get the Skills you need for a
+              <HighlightText text={"Job that is in demand"} />
+            </div>
 
-     
+            <div>
+              <div className="flex flex-col gap-10 w-[90%] justify-center items-start ml-5 m-4 p-8  ">
+                <div className="font-calibari text-left font-2xl font-semibold pl-6 ">
+                  ` The modern StudyNotion is the dictates its own terms. Today,
+                  to be a competitive specialist requires more than professional
+                  skills.`
+                </div>
+                <div className="w-[30%] pl-6 ">
+                  <CTAButton active={true} linkto={"/signup"}>
+                    Learn more
+                  </CTAButton>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="w-11/12 mx-auto max-w-maxContent flex justify-between items-center gap-10">
+          <div className=" pl-20">
+            <TimelineSection />
+          </div>
+        </div>
+
+        <div className=" mx-auto max-w-maxContent flex items-center gap-9 w-11/12 pl-7">
+          <LearningLanguageSection />
+        </div>
+      </div>
+
+      {/* Section 3 */}
+      <div className="flex mx-auto w-11/12 max-w-maxContent gap-28 items-center font-calibari text-pure-greys-25 ">
+        <div>
+          {/* image */}
+          <img src={section3Img} alt="lady img" />
+        </div>
+        <div className="flex flex-col gap-6 mx-auto justify-center w-[50%] items-center">
+          {/* Description */}
+
+          <div className="text-5xl font-bold">
+            Become an{" "}
+            <span className="">
+              <HighlightText text={"Instructor"} />
+            </span>
+          </div>
+          <div className="">
+            Instructors from around the world teach millions of students on
+            StudyNotion. We provide the tools and skills to teach what you love.
+          </div>
+          <div className="w-[35%]">
+            <CTAButton active={true} linkto={"/signup"}>
+              <div className="flex items-center justify-between gap-3">
+             Start Learning Today 
+                <FaArrowRight />
+              </div>
+            </CTAButton>
+          </div>
+        </div>
+      </div>
 
       {/* Footer */}
     </div>

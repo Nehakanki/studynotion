@@ -6,7 +6,7 @@ const CTAButton = ({children, active, linkto}) => {
   return (
     <div>
       <Link to ={linkto}>
-        <div className={`text-center font-calibari text-[13px] px-6 py-3 rounded-md font-bold
+        <div className={`text-center  font-calibari text-[13px] px-6 py-3 rounded-md font-bold
         
         ${active ? "bg-yellow-50 text-black": "bg-richblack-700" }
         hover:scale-95 transition-all duration-200

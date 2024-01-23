@@ -1,6 +1,7 @@
 import React from 'react'
 import HighlightText from './HighlightText'
 import calender from '../../../assests/logos/Calender.jpg'
+import CTAButton from './CTAButton'
 
 const LearningLanguageSection = () => {
   return (
@@ -19,6 +20,11 @@ const LearningLanguageSection = () => {
           <img src={calender} alt="" />
         </div>
 
+        <div className='font-calibari w-[30%] mx-auto flex items-center justify-center'>
+          <CTAButton active={true} linkto={"/signup"}>
+            Learn more
+          </CTAButton>
+        </div>
       
       </div>
 
