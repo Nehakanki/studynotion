@@ -7,6 +7,7 @@ import banner from "../assests/banner/home.mp4";
 import CodeBlocks from "../components/core/HomePag/CodeBlocks";
 import LearningLanguageSection from '../components/core/HomePag/LearningLanguageSection'
 import TimelineSection from "../components/core/HomePag/TimelineSection";
+import calender from "../assests/logos/Calender.jpg"
 
 const Home = () => {
   return (
@@ -112,7 +113,7 @@ const Home = () => {
       </div>
       {/* section2 */}
       <div className='bg-pure-greys-5 text-richblack-700'>
-            <div className="homepage_bg h-[310px] ">
+            <div className="homepage_bg  w-11/12 mx-auto max-w-maxContent h-[310px] ">
               <div className="  max-auto  max-w-maxContent flex flex-col items-center gap-5">
                   <div className="h-[150px]"></div>
                 <div className="flex gap-7 text-white ">
@@ -133,7 +134,7 @@ const Home = () => {
 
             </div>
 
-            <div className='mx-auto w-11/12 flex  justify-between gap-10'>
+            <div className='mx-auto w-11/12 max-w-maxContent   flex justify-between gap-10'>
               <div className="flex gap-10 justify-between items-center">
 
                 <div className="text-4xl font-semibold font-calibari w-[60%]">
@@ -166,7 +167,7 @@ const Home = () => {
       
             </div>
 
-            <div className="w-11/12 mx-auto flex justify-between items-center gap-10">
+            <div className="w-11/12 mx-auto max-w-maxContent flex justify-between items-center gap-10">
                                     
                                     <div className=" pl-20">
                                     <TimelineSection/>
@@ -176,7 +177,7 @@ const Home = () => {
           
             </div>
 
-            <div>
+            <div className=" mx-auto max-w-maxContent flex items-center gap-9 w-11/12 pl-7">
             <LearningLanguageSection/>
             </div>
           
@@ -187,6 +188,8 @@ const Home = () => {
         </div>
 
       {/* Section 3 */}
+
+     
 
       {/* Footer */}
     </div>

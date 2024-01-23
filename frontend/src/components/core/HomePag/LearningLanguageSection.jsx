@@ -1,9 +1,11 @@
 import React from 'react'
 import HighlightText from './HighlightText'
+import calender from '../../../assests/logos/Calender.jpg'
+
 const LearningLanguageSection = () => {
   return (
     <div>
-      <div className='flex flex-col gap-5 font-semibold text-center mt-[120px] font-calibari'>
+      <div className='flex flex-col gap-5 font-semibold text-center mt-[120px] font-calibari '>
         <div className='text-4xl font-semibold text-center'>
           <span className='text-richblack-500'>Your Swiss knife for </span>
           <HighlightText text={"Learning any Language"}/>
@@ -13,9 +15,14 @@ const LearningLanguageSection = () => {
         progress tracking, custom schedule and more.
         </div>
 
+        <div  className='mx-auto lg:p-10'>
+          <img src={calender} alt="" />
+        </div>
 
-
+      
       </div>
+
+      
     </div>
   )
 }
