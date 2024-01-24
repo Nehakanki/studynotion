@@ -160,6 +160,7 @@ const Home = () => {
           <LearningLanguageSection />
         </div>
       </div>
+      
         
       {/* Section 3 */}
       <div className="flex mx-auto w-11/12 max-w-maxContent gap-28 items-center font-calibari text-pure-greys-25 ">
