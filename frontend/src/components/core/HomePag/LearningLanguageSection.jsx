@@ -20,7 +20,7 @@ const LearningLanguageSection = () => {
           <img src={calender} alt="" />
         </div>
 
-        <div className='font-calibari w-[30%] mx-auto flex items-center justify-center'>
+        <div className='font-calibari sm:w-[30%] mx-auto flex items-center justify-center'>
           <CTAButton active={true} linkto={"/signup"}>
             Learn more
           </CTAButton>

@@ -12,22 +12,34 @@ const tabsName = [
 
 
 const ExploreMore = () => {
-  const [currentTab, setcurrentTab] = useState(tabsName[0]);
+ const [currentTab, setcurrentTab] = useState(tabsName[0]);
 const [courses, setCourses] = useState(HomePageExplore[0].courses);
+console.log(courses)
 const [currentCard, setcurrentCard] = useState(
   HomePageExplore[0].courses[0].heading
 );
 
 const setMyCards = (value) => {
   setcurrentTab(value);
-  const result = HomePageExplore.filter((course) => course.tag === value); //get the course for selected tab
+  console.log(currentTab)
+ const result = HomePageExplore.filter((course) => course.tag === value); //get the course for selected tab
+ if (result.length > 0 && result[0].courses) {
+  console.log(result)
   setCourses(result[0].courses);
-  setcurrentCard(result[0].courses[0].heading);
+  console.log(courses)
+} else {
+  // Handle the case where no matching courses are found
+  setCourses([]);
+}
+  // setCourses(result[0].courses);
+//   setcurrentCard(result[0].courses[0].heading);
 };
+// console.log(currentTab)
+// console.log(result);
 
 
   return (
-    <div className="font-calibari mx-auto">
+    <div className="font-calibari sm:max-w-maxContent sm:mx-auto  ">
       <div className="sm:text-3xl text-pure-greys-25 font-calibari  font-semibold text-center">
         Unlock the
         <HighlightText text={"Power of Code"} />
@@ -59,20 +71,31 @@ const setMyCards = (value) => {
         </div>
       </div>
 
-      <div className="sm:h-[150px]">
+      <div className="sm:flex sm:flex-row flex flex-col border-4 sm:gap-5 gap-2 sm:p-5 p-2 ">
         {/* course Card */}
-        <div>
-          {courses.map((element, index) => {
+        
+          {courses.map((courseArray, index) => {
             return (
-              <CourseCard
-                key={index}
-                cardData={element}
-                setcurrentCard={setcurrentCard}
-              />
+              // <CourseCard
+              //   key={index}
+              //   // cardData={element}
+              //   // setcurrentCard={setcurrentCard}
+                
+              // />
+
+              <div className="text-pure-greys-25 sm:w-[40%] border-red-950 text-center	sm:p-4 p-2">
+                  <p>{courseArray.heading}</p>
+                  <p className="sm:text-start">{courseArray.description}</p>
+                <div className="flex flex-row justify-between mt-3">
+                <p>Level: {courseArray.level}</p>
+                  <p>Lectures: {courseArray.lessonNumber}</p>
+                  </div>
+
+               </div>
             );
           })}
         </div>
-      </div>
+     
     </div>
   );
 };

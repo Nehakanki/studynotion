@@ -140,7 +140,7 @@ const Home = () => {
                   to be a competitive specialist requires more than professional
                   skills.`
                 </div>
-                <div className="sm:pl-6  mx-auto  pl-10 ">
+                <div className="sm:pl-6 sm:w-[35%] mx-auto  pl-10 ">
                   <CTAButton active={true} linkto={"/signup"}>
                     Learn more
                   </CTAButton>
@@ -163,15 +163,15 @@ const Home = () => {
       
         
       {/* Section 3 */}
-      <div className="flex mx-auto w-11/12 max-w-maxContent gap-28 items-center font-calibari text-pure-greys-25 ">
-        <div>
+      <div className="sm:flex sm:flex-row flex flex-col mx-auto sm:w-11/12 max-w-maxContent sm:gap-28 gap-4 items-center font-calibari text-pure-greys-25 ">
+        <div className="">
           {/* image */}
           <img src={section3Img} alt="lady img" />
         </div>
-        <div className="flex flex-col gap-6 mx-auto justify-center w-[50%] items-center">
+        <div className="flex flex-col sm:gap-6 gap-3 mx-auto justify-center sm:w-[50%] p-4 items-center">
           {/* Description */}
 
-          <div className="text-5xl font-bold">
+          <div className="sm:text-5xl sm:font-bold font-semibold text-2xl">
             Become an{" "}
             <span className="">
               <HighlightText text={"Instructor"} />
@@ -181,7 +181,7 @@ const Home = () => {
             Instructors from around the world teach millions of students on
             StudyNotion. We provide the tools and skills to teach what you love.
           </div>
-          <div className="w-[35%]">
+          <div className="sm:w-[35%] mx-auto m-3">
             <CTAButton active={true} linkto={"/signup"}>
               <div className="flex items-center justify-between gap-3">
              Start Learning Today 
