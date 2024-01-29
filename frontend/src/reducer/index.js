@@ -3,6 +3,8 @@ import authReducer from '../slices/authSlice'
 import profileReducer from '../slices/profileSlice'
 import cartReducer from '../slices/cartSlice'
 
+// all the slices are combined here
+
 const rootReducer = combineReducers({
     auth: authReducer,
     profile: profileReducer,
