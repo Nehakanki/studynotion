@@ -6,7 +6,7 @@ require('dotenv').config();
 // Define Port
 const PORT = process.env.PORT || 4000;
 
-// Routes
+// fetch routes from the main  Routes folder
 const userRoutes = require("./routes/User");
 const profileRoutes = require("./routes/Profile");
 const paymentRoute = require("./routes/Payment");
@@ -23,7 +23,7 @@ app.use(cookieParser());
 const cors = require('cors');
 app.use(
     cors({
-        origin: "https://localhost:3000",
+        origin: "http://localhost:3000",
         credentials: true,
     })
 );

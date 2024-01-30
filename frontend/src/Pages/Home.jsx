@@ -109,7 +109,7 @@ const Home = () => {
       {/* section2 */}
       <div className="bg-pure-greys-5 text-richblack-700">
         <div className="homepage_bg  w-11/12 mx-auto max-w-maxContent h-[310px] ">
-          <div className="  max-auto  max-w-maxContent flex flex-col items-center gap-5">
+          <div className=" relative max-auto  max-w-maxContent flex flex-col items-center gap-5">
             <div className="h-[150px]"></div>
             <div className="flex gap-7 text-white ">
               <CTAButton active={true} linkto={"/signup"}>
