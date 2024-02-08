@@ -1,37 +1,58 @@
-import './App.css';
-import './index.css';
-import { Route, Routes } from 'react-router-dom';
-import Home from './Pages/Home'; 
-import Login from './Pages/Login';
-import Navbar from './components/core/Navbar'
-import Signup from './Pages/Signup';
+import "./App.css";
+import "./index.css";
+import { Route, Routes } from "react-router-dom";
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import Navbar from "./components/core/Navbar";
+import Signup from "./Pages/Signup";
+ 
+import ForgotPassword from "./Pages/ForgotPassword";
 
-const App = ()=> {
+const App = () => {
   return (
-    <div className='w-screen min-h-screen flex flex-col font-inter bg-richblack-800 '>
-      <Navbar/>
+    <div className="w-screen min-h-screen flex flex-col font-inter bg-richblack-800 ">
+      <Navbar />
       <Routes>
-        <Route path='/' element={
-          <OpenRoute> <Home/></OpenRoute>
+        <Route
+          path="/"
+          element={
+           
+           
+              <Home />
+            
+          }
+        />
+        <Route
+          path="/login"
+          element={
+           
+              <Login />
        
-        
-        }/>
-        <Route path='/login' element={
-
-
-<OpenRoute> <Login/></OpenRoute>
-        }/>
-        <Route path= '/signup' element={
-        
-        
-        <OpenRoute> <Signup/></OpenRoute>
-        }/>
-
-       </Routes>
-
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+           
+              <Signup />
+           
+          }
+        />
+        <Route
+        path ='forgot-password'
+        element={
        
+          <ForgotPassword/>
+        
+        }
+        
+        />
+
+
+      </Routes>
+
     </div>
   );
-}
+};
 
 export default App;

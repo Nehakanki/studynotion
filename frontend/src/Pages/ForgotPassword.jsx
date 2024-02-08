@@ -1,6 +1,9 @@
-import React, {useState} from 'react'
-import { UseSelector, useDispatch } from 'react-redux'
-import {Link} from 'react-router-dom'
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'; 
+import { Link } from 'react-router-dom';
+import {getPasswordResetToken} from '../services/operations/authApi'
+
+// Your component code goes here
 
 const ForgotPassword = () => {
 
@@ -11,14 +14,19 @@ const ForgotPassword = () => {
 
     const [email, setEmail] = useState("")
     const [emailSent, setEmailSent] = useState(false)
-    const dispatch = dispatch()
+    const dispatch = useDispatch()
     const { loading } = useSelector((state) => state.auth)
+    const handleOnSubmit=(e)=>{
+      e.preventDefault();
+      dispatch(getPasswordResetToken(email, setEmailSent))
+     }
+    
   return (
     <div>
       {
         loading ? <div>Loading ....</div>:
         // show content 
-          <div>
+          <div className='w-11/12 flex flex-col items-center mx-auto max-w-maxContent justify-between  text-richblack-25'>
               {/* if there is EmailSent then page 2 else page 1 */}
              <h1>
               {
@@ -28,15 +36,15 @@ const ForgotPassword = () => {
 
              <p>
                 {
-                  !emailSent ?"Have no fear. We’ll email you instructions to reset your passwid. If you dont have access to your email we can try account recovery"  :`We have sent the reset email to ${email}
+                  !emailSent ?"Have no fear. We'll email you instructions to reset your passwid. If you dont have access to your email we can try account recovery"  :`We have sent the reset email to ${email}
                   `
                 }
              </p>
 
-             <form>
+             <form onSubmit={handleOnSubmit}>
                 {
                      !emailSent && (
-                      <label>
+                      <label className='w-full'>
                         <p>Email Address *</p>
                         <input
                          required
@@ -45,14 +53,17 @@ const ForgotPassword = () => {
                          value ={email}
                          onChange={(e)=> setEmail(e.target.value)}
                          placeholder='Enter your Email Address'
-      
+                         className="form-style w-full"
                         />
                       </label>
                    
                      )
                 }
 
-                <button>
+                <button 
+                type ='submit'
+                
+                >
                   {
                     emailSent ? "Reset password":"Check your Email"
                   }
@@ -60,9 +71,9 @@ const ForgotPassword = () => {
              </form>
 
              <div>
-              <Link to="/login">
-                <p>Back to login</p>
-              </Link>
+                <Link to="/login">
+                  <p>Back to login</p>
+                </Link>
               </div>
              
           </div>

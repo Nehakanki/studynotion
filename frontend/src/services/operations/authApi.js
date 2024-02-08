@@ -1,3 +1,16 @@
+import {toast} from 'react-hot-toast';
+
+import { apiConnector } from "../apiconnector"
+import { endpoints } from "../apis"
+import {setLoading, setToken} from '../../slices/authSlice' 
+
+const {
+    SENDOTP_API,
+    SIGNUP_API,
+    LOGIN_API,
+    RESETPASSTOKEN_API,
+    RESETPASSWORD_API,
+} = endpoints
 
 
 
