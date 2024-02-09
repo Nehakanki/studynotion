@@ -1,8 +1,16 @@
-import React from 'react'
+import React from 'react';
+import {Template} from '../components/core/Auth/Template'
+import SignUPImage from '../assests/banner/login/Frame 22.jpg'
 
 const Signup = () => {
   return (
-    <div>Signup</div>
+    <Template
+    title="Join the millions learning to code with StudyNotion for free"
+    description1="Build skills for today, tomorrow, and beyond."
+    description2="Education to future-proof your career."
+    image ={SignUPImage}
+    formType="signup"
+  />
   )
 }
 
