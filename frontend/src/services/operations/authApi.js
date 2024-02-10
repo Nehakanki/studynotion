@@ -1,5 +1,6 @@
 import { toast } from "react-hot-toast";
-import { navigate } from '@reach/router';
+import { setUser } from "../../slices/profileSlice"
+import { Link } from "react-router-dom";
 import { apiConnector } from "../apiconnector";
 import { endpoints } from "../apis";
 import { setLoading, setToken } from "../../slices/authSlice";
@@ -30,7 +31,8 @@ export function sendOTP(email, navigate) {
       }
       toast.success("OTP Sent Successfully");
 
-      navigate("/verify-email");
+      // navigate("/verify-email");
+      <Link to='/verify-email'></Link>
     } catch (error) {
       console.log("Error while sending OTP", error);
       toast.error("Could Not Send OTP");
@@ -72,12 +74,15 @@ export function sendOTP(email, navigate) {
         throw new Error(response.data.message);
       }
       toast.success("Sigup Done Successfully");
-      navigate('/login');
+      // navigate('/login');
+      <Link to='login'></Link>
      
     }catch(error){
       console.log("Error while doing Signup", error);
       toast.error("Signup Failed");
-      navigate('/signup');
+      // navigate('/signup');
+      
+      <Link to='/signup'></Link>
 
     }
     dispatch(setLoading(false));
@@ -100,13 +105,15 @@ export function login(
       });
       console.log("LOGIN API RESPONSE............", response);
       console.log(response.data.success);
+      if (!response.data.success) {
+        throw new Error(response.data.message)
+      }
 
+      toast.success("Login Successful");
       dispatch(setToken(response.data.token));
     // find the image into User data and if the image is avail. then set it else use the api for creating image using First name and lastName
 
-    if (!response.data.success) {
-      throw new Error(response.data.message)
-    }
+    
 
       const userImage = response.data?.user?.image ?  response.data.user.image:  `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`;
 
@@ -114,14 +121,16 @@ export function login(
       dispatch(setUser({ ...response.data.user, image: userImage }))
 
       localStorage.setItem("token", JSON.stringify(response.data.token));
-      localStorage.setItem("user",JSON.stringify(reponse.data.user))
-      navigate("/dashboard/my-profile")
+      localStorage.setItem("user",JSON.stringify(response.data.user));
+      // navigate("/dashboard/my-profile")
+      
+    
+
 
     
 
-      toast.success("Login Successful");
 
-
+      <Link to='/dashboard/my-profile'></Link>
 
     }catch(error){
       console.log("Error while LOGIN.", error);
@@ -155,4 +164,33 @@ export function getPasswordResetToken(email, setEmailSent) {
     }
     dispatch(setLoading(false));
   };
+}
+//"password", "qwerty", "12345"
+
+export function resetPassword(password, confirmPassword, token){
+  return async(dispatch)=>{
+    dispatch(setLoading(true));
+    try{
+      const response = await apiConnector("POST", RESETPASSWORD_API,{
+        password,
+        confirmPassword,
+        token
+      } );
+      console.log("Password reset response ---->", response);
+      
+      if(!response.data.success){
+        throw new Error(response.data.message);
+      }
+      toast.success("Password Reset Done")
+      
+
+
+    }catch(error){
+      console.log("password Reset error", error);
+      toast.error("Failed to reset the error");
+
+    }
+    dispatch(setLoading(false));
+
+  }
 }

@@ -65,7 +65,7 @@ const ForgotPassword = () => {
                 
                 >
                   {
-                    emailSent ? "Reset password":"Check your Email"
+                    !emailSent ? "Reset password":" Resent yEmail"
                   }
                 </button>
              </form>

@@ -32,7 +32,7 @@ exports.resetPasswordToken = async (req, res) => {
       { new: true }//in order to get the updated DB 
     );
     //5. create URL
-    const url = `https://localhost:3000/update-password/${token}`;
+    const url = `http://localhost:3000/update-password/${token}`;
 
     //6. send Mail containing url
     await mailSender(email, "Password Reset Link", `Password Url Link: ${url}`);
@@ -57,6 +57,7 @@ exports.resetPassword = async(req, res)=>{
     try{
                //1. data fetch
     const {password, confirmPassword, token}= req.body;
+    console.log(password, confirmPassword);
     //2. validate
    if(password !== confirmPassword){
        return res.json({

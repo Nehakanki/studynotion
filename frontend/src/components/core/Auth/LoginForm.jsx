@@ -8,7 +8,7 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import {login} from '../../../../src/services/operations/authApi'
 
 const LoginForm = () => {
-     const navigate = useNavigate()
+    //  const navigate = useNavigate()
      const dispatch = useDispatch()
      const [formData, setFormData] = useState({
         email: "",
@@ -25,8 +25,8 @@ const LoginForm = () => {
         }))
      }
      const handleOnSubmit = (e)=>{
-        e.prevantDefault()
-        dispatch(login(email, password, navigate))
+        e.preventDefault()
+        dispatch(login(email, password))
      }
 
   return (
