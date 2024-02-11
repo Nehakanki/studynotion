@@ -22,6 +22,7 @@ const LoginForm = () => {
         setFormData((preData)=>({
             ...preData,
             [e.target.name]:e.target.value
+         
         }))
      }
      const handleOnSubmit = (e)=>{
