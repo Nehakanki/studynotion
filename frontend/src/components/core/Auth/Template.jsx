@@ -11,7 +11,7 @@ const Template = ({title, description1, description2,   image, formType}) => {
   return (
     <div>
 
-        <div className='grid min-h-[calc(100vh-3.5rem)] place-items-center'>
+        <div className='grid min-h-[calc(100vh-3.5rem)] place-items-center font-calibari'>
             {
 
                 loading ? (<div className="spinner"></div>):
@@ -22,6 +22,7 @@ const Template = ({title, description1, description2,   image, formType}) => {
 
                         </h1>
                         <p className='mt-4 text-[1.25rem] leading-[1.625rem]'>
+                            
                             <span className='text-richblack-100'>{description1}</span>{" "}
                             <span className='font-edu-sa font-bold italic text-blue-100'>
                                 {description2}

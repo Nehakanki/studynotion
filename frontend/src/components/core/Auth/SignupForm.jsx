@@ -1,9 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
+import { sendOTP } from "../../../services/operations/authApi";
+import { setSignupData } from "../../../slices/authSlice";
+// import { ACCOUNT_TYPE } from "../../../utils/constanst";
+import { toast } from "react-hot-toast";
 
 const SignupForm = () => {
   const dispatch = useDispatch();
@@ -27,7 +30,14 @@ const SignupForm = () => {
   });
 
   //   destructure the values
-  const { firstName, lastName, email, password, contactNumber } = formData;
+  const {
+    firstName,
+    lastName,
+    email,
+    confirmPassword,
+    password,
+    contactNumber,
+  } = formData;
 
   const changeHandler = (e) => {
     setFormData((prev) => ({
@@ -40,43 +50,71 @@ const SignupForm = () => {
 
   const sumbitHandler = (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      toast.error("Passwords Do Not Match");
+      return;
+    }
+    const signupData = {
+      ...formData,
+    };
 
-    // dispatch the Signup
-    // dispatch()
+    // To be used after otp verification
+    dispatch(setSignupData(signupData));
+    // Send OTP to user for verification
+    dispatch(sendOTP(email));
+
+    // Reset
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    });
+  //  setAccountType(ACCOUNT_TYPE.STUDENT);
   };
 
   return (
-    <div className="text-richblack-25">
+    <div className="text-richblack-25 font-calibari rounded-lg ">
       {/* selcting the Account type */}
 
-      <div className="flex gap-3">
+      <div className="flex gap-3 mt-2 p-4 rounded-lg ">
+        <b className="px-4">Choose Account Type:</b>
         <div
           onClick={() => handleAccountTypeChange("Student")}
-          style={{ cursor: "pointer" }}
+          className={`cursor-pointer ${
+            accountType === "Student"
+              ? "bg-yellow-50 rounded-lg px-2  text-richblack-800"
+              : ""
+          }`}
         >
-          {accountType === "Student" ? <b>Student</b> : "Student"}
+          {accountType === "Student" ? <span>Student</span> : "Student"}
         </div>
         <div
           onClick={() => handleAccountTypeChange("Instructor")}
-          style={{ cursor: "pointer" }}
+          className={`cursor-pointer ${
+            accountType === "Instructor"
+              ? "bg-yellow-50 rounded-lg px-2 text-richblack-800"
+              : ""
+          }`}
         >
-          {accountType === "Instructor" ? <b>Instructor</b> : "Instructor"}
+          {accountType === "Instructor" ? (
+            <span>Instructor</span>
+          ) : (
+            "Instructor"
+          )}
         </div>
       </div>
 
-      <form onSubmit={sumbitHandler}
-      
-      className="flex w-full flex-col gap-y-4"
-      
-      >
+      <form onSubmit={sumbitHandler} className="flex w-full flex-col gap-y-4">
         {/* main form */}
         <div>
           {/* firstname And LastName */}
-          <div className="flex gap-5">
+          <div className="flex gap-5 ">
             <label>
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-              First Name <sup className="text-pink-200">*</sup>
-            </p>
+              <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-25">
+                First Name <sup className="text-pink-200">*</sup>
+              </p>
 
               <input
                 required
@@ -86,15 +124,15 @@ const SignupForm = () => {
                 onChange={changeHandler}
                 placeholder="First Name"
                 style={{
-                    boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
-                  }}
-                  className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
+                  boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                }}
+                className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-25"
               />
             </label>
             <label>
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-              Last Name <sup className="text-pink-200">*</sup>
-            </p>
+              <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-25">
+                Last Name <sup className="text-pink-200">*</sup>
+              </p>
 
               <input
                 required
@@ -104,36 +142,37 @@ const SignupForm = () => {
                 onChange={changeHandler}
                 placeholder="Last Name"
                 style={{
-                    boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
-                  }}
-                  className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
-    
+                  boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                }}
+                className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-25"
               />
             </label>
           </div>
 
-          <label>
-            <p>
-              Email<sup>*</sup>
+          <label className="w-full">
+            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-25">
+              Email<sup className="text-pink-200">*</sup>
             </p>
             <input
               required
-              className="text-richblack-800"
               type="text"
               name="email"
               value={email}
               onChange={changeHandler}
               placeholder="Email Address"
+              style={{
+                boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+              }}
+              className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-25"
             />
           </label>
 
-          <label>
-            <p>
-              Contact No.<sup>*</sup>
+          <label className="w-full">
+            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-25">
+              Contact No.<sup className="text-">*</sup>
             </p>
             <input
               required
-              className="text-richblack-800"
               type="tel"
               name="contactNumber"
               value={contactNumber}
@@ -146,65 +185,79 @@ const SignupForm = () => {
                 }
               }}
               maxLength={10}
+              style={{
+                boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+              }}
+              className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
             />
           </label>
 
-          <label className="relative">
-            <p className="mb-1 text-[0.6rem] leading-[1.375rem] text-richblack-5">
-              Password <sub className="text-pink-200">*</sub>
-            </p>
-            <input
-              required
-              // hiden or shown
-              type={showPassword ? "text" : "password"}
-              name="password"
-              onChange={changeHandler}
-              placeholder="Enter Password"
-              style={{
-                boxShadow: "inset 0px -1px 0px rgba(255,255,255,0.18)",
-              }}
-              className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
-            />
-            <span
-              onClick={() => setPassword((prev) => !prev)}
-              className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+                {/* Password */}
+          <div className="flex gap-x-4">
+            <label className="relative">
+              <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-25">
+                Create Password <sup className="text-pink-200">*</sup>
+              </p>
+              <input
+                required
+                // hiden or shown
+                type={showPassword ? "text" : "password"}
+                name="password"
+                onChange={changeHandler}
+                placeholder="Enter Password"
+                style={{
+                  boxShadow: "inset 0px -1px 0px rgba(255,255,255,0.18)",
+                }}
+                className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-25"
+              />
+              <span
+                onClick={() => setPassword((prev) => !prev)}
+                className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+              >
+                {showPassword ? (
+                  <FaRegEye fontSize={24} fill="#AFB2BE" />
+                ) : (
+                  <FaRegEyeSlash fontSize={24} fill="#AFB2BE" />
+                )}
+              </span>
+            </label>
+
+            <label className="relative">
+              <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-25">
+                Confirm Password <sub className="text-pink-200">*</sub>
+              </p>
+              <input
+                required
+                // hiden or shown
+                type={showConfirmPassword ? "text" : "password"}
+                name="confirmPassword"
+                onChange={changeHandler}
+                placeholder="Enter Password"
+                style={{
+                  boxShadow: "inset 0px -1px 0px rgba(255,255,255,0.18)",
+                }}
+                className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-25"
+              />
+              <span
+                onClick={() => setConfirmPassword((prev) => !prev)}
+                className="absolute right-3 top-[25px] z-[10] cursor-pointer"
+              >
+                {showPassword ? (
+                  <FaRegEye fontSize={24} fill="#AFB2BE" />
+                ) : (
+                  <FaRegEyeSlash fontSize={24} fill="#AFB2BE" />
+                )}
+              </span>
+            </label>
+          </div>
+          <div className="w-full flex justify-center items-center">
+            <button
+              type="submit"
+              className="text-center  w-[35%]  mt-2 text-richblack-800  font-calibari bg-yellow-50 text-[13px] px-5 py-2 rounded-md font-bold"
             >
-              {showPassword ? (
-                <FaRegEye fontSize={24} fill="#AFB2BE" />
-              ) : (
-                <FaRegEyeSlash fontSize={24} fill="#AFB2BE" />
-              )}
-            </span>
-          </label>
-        
-          <label className="relative">
-            <p className="mb-1 text-[0.6rem] leading-[1.375rem] text-richblack-5">
-              Confirm Password <sub className="text-pink-200">*</sub>
-            </p>
-            <input
-              required
-              // hiden or shown
-              type={showConfirmPassword? "text" : "password"}
-              name="password"
-              onChange={changeHandler}
-              placeholder="Enter Password"
-              style={{
-                boxShadow: "inset 0px -1px 0px rgba(255,255,255,0.18)",
-              }}
-              className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
-            />
-            <span
-              onClick={() => setConfirmPassword((prev) => !prev)}
-              className="absolute right-3 top-[25px] z-[10] cursor-pointer"
-            >
-              {showPassword ? (
-                <FaRegEye fontSize={24} fill="#AFB2BE" />
-              ) : (
-                <FaRegEyeSlash fontSize={24} fill="#AFB2BE" />
-              )}
-            </span>
-          </label>
-          <button type="submit">SignUp</button>
+              SignUp
+            </button>
+          </div>
         </div>
       </form>
     </div>

@@ -13,7 +13,7 @@ const {
   RESETPASSWORD_API,
 } = endpoints;
 
-export function sendOTP(email, navigate) {
+export function sendOTP(email) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
     dispatch(setLoading(true));
