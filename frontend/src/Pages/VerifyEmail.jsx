@@ -6,17 +6,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BiArrowBack } from "react-icons/bi";
 import { RxCountdownTimer } from "react-icons/rx";
 import { sendOTP,signUp  } from '../services/operations/authApi';
+import { useNavigate } from "react-router-dom";
 
 
 
 const VerifyEmail = () => {
     const [otp, setOtp] = useState("");
+    const navigate = useNavigate();
     const {loading, signupData} = useSelector((state)=> state.auth);
     const dispatch = useDispatch();
     useEffect(() => {
         // make sure Signup data is there
         if (!signupData) {
-            <Link to='/signup'></Link>
+            navigate('/signup');
         }
       
       }, []);

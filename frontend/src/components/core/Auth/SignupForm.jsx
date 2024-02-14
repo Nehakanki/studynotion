@@ -7,10 +7,12 @@ import { sendOTP } from "../../../services/operations/authApi";
 import { setSignupData } from "../../../slices/authSlice";
 // import { ACCOUNT_TYPE } from "../../../utils/constanst";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom"
+
 
 const SignupForm = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [accountType, setAccountType] = useState("Student");
   const handleAccountTypeChange = (accountType) => {
     setAccountType(accountType);
@@ -61,7 +63,7 @@ const SignupForm = () => {
     // To be used after otp verification
     dispatch(setSignupData(signupData));
     // Send OTP to user for verification
-    dispatch(sendOTP(email));
+    dispatch(sendOTP(email,navigate));
 
     // Reset
     setFormData({
