@@ -48,7 +48,7 @@ const Navbar = () => {
         fetchSublinks();
 
     },[])
-
+// for matching the route
   const matchRoute = (route) => {
     return matchPath({ path: route }, location.pathname);
   };

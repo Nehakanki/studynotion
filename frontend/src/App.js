@@ -9,6 +9,7 @@ import Signup from "./Pages/Signup";
 import ForgotPassword from "./Pages/ForgotPassword";
 import UpdatePassword from "./Pages/UpdatePassword";
 import VerifyEmail from "./Pages/VerifyEmail";
+import AboutUs from "./Pages/AboutUs";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route path="update-password/:id" element={<UpdatePassword />} />
         <Route path= "verify-email" element={<VerifyEmail/>}/>
+        <Route path="about" element={<AboutUs/>} />
       </Routes>
     </div>
   );
