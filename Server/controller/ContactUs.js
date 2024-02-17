@@ -4,10 +4,13 @@ require("dotenv").config();
 
 
 exports.sendMailtoUSer = async (req,res)=>{
-    const {email} = req.body;
+
+    const {email,  firstname, lastname, message, phoneNo, countrycode} = req.body;
 
     try{
-        const mailTouser = await mailSender(email ,"Thanks for Visting","Your message is took upon Thanks for visting our Website");
+        const mailTouser = await mailSender(email ,`Thanks for Visting!!`,`Your message is took upon ${firstname} 
+
+        \n Thanks for visting our Website`);
 
         if(!mailSender){
             console.log("Error in sending email")

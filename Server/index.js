@@ -11,6 +11,7 @@ const userRoutes = require("./routes/User");
 const profileRoutes = require("./routes/Profile");
 const paymentRoute = require("./routes/Payment");
 const courseRoute = require("./routes/Course");
+const contactUsRoute = require("./routes/Contact");
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -50,6 +51,8 @@ app.use('/api/v1/auth', userRoutes);
 app.use('/api/v1/profile', profileRoutes);
 app.use('/api/v1/course', courseRoute);
 app.use('/api/v1/payment', paymentRoute);
+app.use("/api/v1/reach", contactUsRoute);
+
 
 // Default server response
 app.get("/", (req, res) => {

@@ -6,6 +6,7 @@ import Image3 from "../../src/assests/banner/AboutUS/Image3.png";
 import Founding from  "../../src/assests/banner/AboutUS/Founding.png";
 import Stats from "../components/core/AboutUS/Stats";
 import LearningGrid from "../components/core/AboutUS/LearningGrid";
+import ContactForm from "../components/core/AboutUS/ContactForm";
 
 const AboutUs = () => {
   return (
@@ -80,6 +81,8 @@ const AboutUs = () => {
 
       <div className="mx-auto mt-20 flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white">
       <LearningGrid/>
+      <ContactForm/>
+     
       </div>
       
     
