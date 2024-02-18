@@ -196,4 +196,16 @@ export function resetPassword(password, confirmPassword, token){
 }
 
 
+export function logout(navigate){
+  return (dispatch)=>{
+    dispatch(setUser(null));
+    dispatch(setToken(null));
+
+    // reset cart remaining
+  localStorage.removeItem("user");
+  localStorage.removeItem("token");
+  toast.success("Logged Out")
+  navigate('/');
+  }
+}
 

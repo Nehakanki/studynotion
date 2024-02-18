@@ -23,6 +23,7 @@ const App = () => {
         <Route path="update-password/:id" element={<UpdatePassword />} />
         <Route path= "verify-email" element={<VerifyEmail/>}/>
         <Route path="about" element={<AboutUs/>} />
+        {/* <Route path="dashboard/my-profile" element={<MyProfile />} /> */}
       </Routes>
     </div>
   );
