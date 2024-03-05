@@ -8,23 +8,19 @@ const ConfirmationModal = ({ setdata }) => {
         <p className="text-2xl font-semibold text-richblack-5">{txt1}</p>
         <p className="mt-3 mb-5 leading-6 text-richblack-200">{txt2}</p>
         <div className="flex items-center gap-x-4">
-        <button
-          className="cursor-pointer rounded-md bg-richblack-200 py-[8px] px-[20px] font-semibold text-richblack-900"
-          onClick={btn1Handler}
-        >
-          {btn1Text}
-        </button>
-        <button
-        className="cursor-pointer rounded-md bg-richblack-200 py-[8px] px-[20px] font-semibold text-richblack-900"
-        
-        onClick={btn2Handler}>
+          <button
+            className="cursor-pointer rounded-md bg-richblack-200 py-[8px] px-[20px] font-semibold text-richblack-900"
+            onClick={btn1Handler}
+          >
+            {btn1Text}
+          </button>
+          <button
+            className="cursor-pointer rounded-md bg-richblack-200 py-[8px] px-[20px] font-semibold text-richblack-900"
+            onClick={btn2Handler}
+          >
             {btn2Text}
-
-        </button>
-
-
-    </div>
-       
+          </button>
+        </div>
       </div>
     </div>
   );

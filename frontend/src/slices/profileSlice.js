@@ -1,6 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit'
 
 const initialState ={
+    // check if the user aldreay logged in if not set it to null
     user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null,
     loading: false,
 }

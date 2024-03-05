@@ -10,6 +10,8 @@ import ForgotPassword from "./Pages/ForgotPassword";
 import UpdatePassword from "./Pages/UpdatePassword";
 import VerifyEmail from "./Pages/VerifyEmail";
 import AboutUs from "./Pages/AboutUs";
+import OpenRoute from "../src/components/core/Auth/OpenRoute";
+import PrivateRoute from '../src/components/core/Auth/PrivateRoute'
 
 const App = () => {
   return (
@@ -17,13 +19,52 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
-        <Route path="forgot-password" element={<ForgotPassword />} />
-        <Route path="update-password/:id" element={<UpdatePassword />} />
-        <Route path= "verify-email" element={<VerifyEmail/>}/>
-        <Route path="about" element={<AboutUs/>} />
-        {/* <Route path="dashboard/my-profile" element={<MyProfile />} /> */}
+        <Route
+          path="login"
+          element={
+            <OpenRoute>
+              <Login />
+            </OpenRoute>
+          }
+        />
+        <Route
+          path="signup"
+          element={
+            <OpenRoute>
+              <Signup />
+            </OpenRoute>
+          }
+        />
+        <Route
+          path="forgot-password"
+          element={
+            <OpenRoute>
+              <ForgotPassword />
+            </OpenRoute>
+          }
+        />
+        <Route
+          path="update-password/:id"
+          element={
+            <OpenRoute>
+              <UpdatePassword />
+            </OpenRoute>
+          }
+        />
+        <Route
+          path="verify-email"
+          element={
+            <OpenRoute>
+              <VerifyEmail />
+            </OpenRoute>
+          }
+        />
+        <Route path="about" element={<AboutUs />} />
+        <Route path="dashboard/my-profile" element={
+        
+        <PrivateRoute> <MyProfile /></PrivateRoute>
+        
+       } />
       </Routes>
     </div>
   );
