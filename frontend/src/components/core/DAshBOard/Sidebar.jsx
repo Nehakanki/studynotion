@@ -42,6 +42,7 @@ const Sidebar = () => {
 
           {/* button for Logout and onCLick a Modal is shown */}
 
+{/* here then confirmation Model data is simultaneously */}
           <button
             onClick={setConfirmationModal({
               txt1: "Are You Sure ?",
