@@ -11,8 +11,9 @@ import UpdatePassword from "./Pages/UpdatePassword";
 import VerifyEmail from "./Pages/VerifyEmail";
 import AboutUs from "./Pages/AboutUs";
 import OpenRoute from "../src/components/core/Auth/OpenRoute";
-import PrivateRoute from '../src/components/core/Auth/PrivateRoute'
-import Myprofile from '../src/components/core/DAshBOard/Myprofile'
+import PrivateRoute from "../src/components/core/Auth/PrivateRoute";
+import Myprofile from "../src/components/core/DAshBOard/Myprofile";
+import Dashboard from "./Pages/Dashboard";
 
 const App = () => {
   return (
@@ -60,12 +61,52 @@ const App = () => {
             </OpenRoute>
           }
         />
-        <Route path="about" element={<AboutUs />} />
-        <Route path="dashboard/my-profile" element={
-        
-        <PrivateRoute> <Myprofile /></PrivateRoute>
-        
-       } />
+
+        {/* <Route path="dashboard/my-profile" element={
+      
+      
+      <PrivateRoute>
+           <Myprofile/>
+      </PrivateRoute>
+      
+  
+      
+      } /> */}
+
+        {/* <Route
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        >
+          <Route path="dashboard/my-profile" element={<Myprofile />} />
+        </Route> */}
+
+
+<Route 
+      element={
+        <PrivateRoute>
+       <Dashboard/>
+        </PrivateRoute>
+      }
+    >
+      <Route path="dashboard/my-profile" element={<Myprofile />} />
+      
+      {/* <Route path="dashboard/Settings" element={<Settings />} /> */}
+      
+
+
+
+    </Route>
+
+
+
+
+
+
+
+
       </Routes>
     </div>
   );

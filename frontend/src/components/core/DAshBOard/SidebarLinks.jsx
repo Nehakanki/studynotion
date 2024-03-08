@@ -1,12 +1,12 @@
 import React from 'react'
-import { VscAccount, VscDashboard, VscVm, VscAdd, VscMortarBoard, VscHistory } from 'react-icons/vsc';
-import {NavLink, matchPath, useLoaction} from 'react-router-dom'
+// import { VscAccount, VscDashboard, VscVm, VscAdd, VscMortarBoard, VscHistory } from 'react-icons/vsc';
+import {NavLink, matchPath, useLocation} from 'react-router-dom'
 
 
 const SidebarLinks = ({link, iconName}) => {
     // error may occour
     const Icon = iconName;
-    const location = useLoaction();
+    const location = useLocation();
     const matchRoute = (route)=>{
         matchPath({path:route}, location.pathname);
     }
