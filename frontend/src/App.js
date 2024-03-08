@@ -12,6 +12,7 @@ import VerifyEmail from "./Pages/VerifyEmail";
 import AboutUs from "./Pages/AboutUs";
 import OpenRoute from "../src/components/core/Auth/OpenRoute";
 import PrivateRoute from '../src/components/core/Auth/PrivateRoute'
+import Myprofile from '../src/components/core/DAshBOard/Myprofile'
 
 const App = () => {
   return (
@@ -62,7 +63,7 @@ const App = () => {
         <Route path="about" element={<AboutUs />} />
         <Route path="dashboard/my-profile" element={
         
-        <PrivateRoute> <MyProfile /></PrivateRoute>
+        <PrivateRoute> <Myprofile /></PrivateRoute>
         
        } />
       </Routes>

@@ -121,11 +121,15 @@ const Navbar = () => {
 
       {/*  1 . if the user is Student the show the cart and no. of courses bought by him */}
       <div className="flex gap-x-4 items-center">
-        {user && user?.accountType != "Instructor" && (
+        {user && user?.accountType !== "Instructor" && (
           <Link to="/dashboard/cart" className="relative">
-            <IoCart />
+            <IoCart className="text-2xl text-richblack-100" />
             {/* placing number above the cart */}
-            {totalItems > 0 && <span>{totalItems}</span>}
+            {totalItems > 0 && (
+                <span className="absolute -bottom-2 -right-2 grid h-5 w-5 place-items-center overflow-hidden rounded-full bg-richblack-600 text-center text-xs font-bold text-yellow-100">
+                  {totalItems}
+                </span>
+              )}
           </Link>
         )}
         {/* signup and login button*/}

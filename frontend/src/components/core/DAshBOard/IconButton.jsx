@@ -5,7 +5,9 @@ const IconButton = ({
     children,
     disabled,
     onclick,
-    disabled,
+    customClasses,
+    type,
+  
     outline= false,
 
 }) => {
@@ -22,7 +24,7 @@ const IconButton = ({
 
         //if any Children , EX--> any icon button then it should be included
         children ? (<>
-           <span className = {`${outline && text-yellow-50}`}>
+           <span className = {`${outline && "text-yellow-50"}`}>
             {text}
 
            </span>
