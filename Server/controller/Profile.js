@@ -144,35 +144,35 @@ async function uploadToCloudinary(file,folder, quality){
 }
 
 exports.updateProfileImagee = async (req,res)=>{
-    try{
-        const id = req.user.id;
-        const image = req.files.image;
-        console.log("Profile Image",image);
-       const updatedImage = await uploadToCloudinary(image,process.env.FOLDER_NAME);
-       console.log(updatedImage)
-       
-        const updateProfileImage = await User.findByIdAndUpdate(id,
-            {
-                $set :{
-                    image: updatedImage.secure_url,
-                }
-            },{new:true});
-
-        console.log(updateProfileImage);
-
-        return res.status(200).json({
-            success:true,
-            message:"Image Updated Successfully",
-            data: updateProfileImage
+    try {
+        console.log("Update backend route")
+        const userId = req.user.id;
+        console.log(userId)
+        
+        const displayPicture = req.files.displayPicture
+        console.log(displayPicture)
+        
+        const image = await uploadToCloudinary(
+          displayPicture,
+          process.env.FOLDER_NAME,
+          1000,
+          1000
+        )
+        console.log(image);
+        const updatedProfile = await User.findByIdAndUpdate(
+          { _id: userId },
+          { image: image.secure_url },
+          { new: true }
+        )
+        res.send({
+          success: true,
+          message: `Image Updated successfully`,
+          data: updatedProfile,
         })
-
-
-    }catch(error){
-
-        return res.status(404).json({
-            success:false,
-            message:error.message
+      } catch (error) {
+        return res.status(500).json({
+          success: false,
+          message: error.message,
         })
-
-    }
+      }
 }

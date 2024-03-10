@@ -10,10 +10,12 @@ import ForgotPassword from "./Pages/ForgotPassword";
 import UpdatePassword from "./Pages/UpdatePassword";
 import VerifyEmail from "./Pages/VerifyEmail";
 import AboutUs from "./Pages/AboutUs";
+
 import OpenRoute from "../src/components/core/Auth/OpenRoute";
 import PrivateRoute from "../src/components/core/Auth/PrivateRoute";
 import Myprofile from "../src/components/core/DAshBOard/Myprofile";
 import Dashboard from "./Pages/Dashboard";
+import Settings from './components/core/DAshBOard/Setting/Settings.jsx'
 
 const App = () => {
   return (
@@ -93,7 +95,7 @@ const App = () => {
     >
       <Route path="dashboard/my-profile" element={<Myprofile />} />
       
-      {/* <Route path="dashboard/Settings" element={<Settings />} /> */}
+      <Route path="dashboard/Settings" element={<Settings />} />
       
 
 
