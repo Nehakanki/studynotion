@@ -30,3 +30,7 @@ html, body{
   animation: spinner-bulqg1 0.8s infinite linear alternate,
     spinner-oaa3wk 1.6s infinite linear;
 }
+
+.label-style {
+  @apply text-[14px] text-richblack-5;
+}

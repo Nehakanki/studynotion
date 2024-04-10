@@ -74,8 +74,8 @@ const ChangeProfile = () => {
         className='aspect-square w-[78px] rounded-full object-cover'
         
         />
-        <div className="space-y-2">
-          <p>Change Profile</p>
+        <div className="space-y-2 font-calibari">
+          <p className=' text-xl'>Change Profile</p>
           <div className="flex flex-row gap-3"  >
           <input
               type='file'
@@ -94,6 +94,8 @@ const ChangeProfile = () => {
             <IconButton
                 text={loading ? "Uploading..." : "Upload"}
                 onclick={handleFileUpload}
+                className='font-calibari'
+                
               >
                 {!loading && (
                   <FiUpload className="text-lg text-richblack-900" />

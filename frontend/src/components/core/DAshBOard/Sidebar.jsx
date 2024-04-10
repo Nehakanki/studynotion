@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { sidebarLinks } from "../HomePag/data/dashboardLinks";
-import { useDispatch, useSelector } from "react-redux";
 import { VscSignOut } from "react-icons/vsc";
-import { logout } from "../../../services/operations/authApi";
-import SidebarLinks from "./SidebarLinks";
-import ConfirmationModal from "./ConfirmationModal";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../../services/operations/authApi";
+import { sidebarLinks } from "../HomePag/data/dashboardLinks";
+import ConfirmationModal from "./ConfirmationModal";
+import SidebarLinks from "./SidebarLinks";
 
 const Sidebar = () => {
   const { loading: authLoading } = useSelector((state) => state.auth);
@@ -27,7 +27,7 @@ const Sidebar = () => {
   }
   
   return (
-    <div>
+    <div className='font-calibari'>
       <div className="flex h-[calc(100vh-3.5rem)] min-w-[220px] flex-col border-r-[1px] border-r-richblack-700 bg-richblack-800 py-10">
         <div className="flex flex-col font-calibri">
           {/* for each link */}
@@ -51,30 +51,27 @@ const Sidebar = () => {
 
           {/* here then confirmation Model data is simultaneously */}
           <button
-           onClick={() =>
-            setConfirmationModal({
-              txt1: "Are You Sure ?",
-              txt2: "You will be logged Out from your Account",
-              btn1Text: "Logout",
-              btn2Text: "Cancel",
-              btn1Handler: () => dispatch(logout(navigate)),
-              btn2Handler: () => setConfirmationModal(null),
-            })
-          }
-            className="text-sm font-medium text-richblack-100 px-6 py-2 "
+            onClick={() =>
+              setConfirmationModal({
+                text1: "Are you sure?",
+                text2: "You will be logged out of your account.",
+                btn1Text: "Logout",
+                btn2Text: "Cancel",
+                btn1Handler: () => dispatch(logout(navigate)),
+                btn2Handler: () => setConfirmationModal(null),
+              })
+            }
+            className="px-8 py-2 text-sm font-medium text-richblack-300"
           >
-            {/* CSS make sure */}
-            <div className="flex items-center justify-center gap-x-2 px-8">
-              <VscSignOut className="text-lg " 
-              
-              />
+            <div className="flex items-center gap-x-2">
+              <VscSignOut className="text-lg" />
               <span>Logout</span>
             </div>
           </button>
         </div>
       </div>
-
-      {Confirmation && <ConfirmationModal setdata={setConfirmationModal} />}
+            
+      {Confirmation && <ConfirmationModal modalData={Confirmation} />}
     </div>
   );
 };

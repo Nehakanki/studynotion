@@ -6,62 +6,63 @@ const { json } = require('express');
 const cloudinary = require('cloudinary').v2;
 
 
-exports.UpdateProfile = async (req,res)=>{
-   
-    try{
-         //get values
-            // const {gender="" ,DOB="", about,ContactNumber } = req.body; --->sir code
-                const {gender,DOB, about,ContactNumber } = req.body;
-                //get User Id 
-                //so if the user is logged in (means it has token ) and that token value we inserted into req,user so that we can easily decode the userID
+exports.UpdateProfile = async (req, res) => {
+    try {
+      const {
+        firstName = "",
+        lastName = "",
+        dateOfBirth = "",
+        about = "",
+        contactNumber = "",
+        gender = "",
+      } = req.body
+      const id = req.user.id.toString();
+    
 
-                const id = req.user.id.toString();
+  
+      const userDetails = await User.findById(id);
 
-                if(!gender || !DOB ||
-                    !about||!ContactNumber|| !id){
-                        return res.status(403).json({
-                            success:false,
-                        message : "All details are required "
-                        })
-                    }
-
-                //find profile id   
-                
-
-                const userDetails = await User.findById(id);
-                const profileID=  userDetails.additonalDetails;
-                const profileDetails = await Profile.findById(profileID); 
-
-                //update the profile Schema since we have aldready created the in SignUp logic
-
-                profileDetails.DOB = DOB;
-                profileDetails.about =about;
-                profileDetails.gender = gender;
-                profileDetails.ContactNumber = ContactNumber;
-                //now save into the DB of profile
-
-                await profileDetails.save();
-
-                //return response
-
-                return res.status(200).json({
-                    success:true,
-                    message:"Profile Updated Successfully"
-                })
+      // console.log(userDetails);
+      // console.log("May be error here -> 2 user details---");
+      const profile = await Profile.findById(userDetails.additonalDetails) 
 
 
+      
 
-    }catch(error){
-        console.log(error)
-        res.status(404).json({
-            success:false,
-            message:error.message
-        })
+
+      const user = await User.findByIdAndUpdate(id, {
+        firstName,
+        lastName,
+      })
+      await user.save()
+  
+      // Update the profile fields
+      profile.DOB = dateOfBirth
+      profile.about = about
+      profile.ContactNumber= contactNumber
+      profile.gender = gender
+  
+      // Save the updated profile
+      await profile.save()
+
+      // Find the updated user details
+      const updatedUserDetails = await User.findById(id)
+        .populate("additonalDetails")
+        .exec()
+  
+      return res.json({
+        success: true,
+        message: "Profile updated successfully",
+        updatedUserDetails,
+      })
+    } catch (error) {
+      console.log(error)
+      return res.status(500).json({
+        success: false,
+        error: error.message,
+      })
     }
-
-
-
-}
+  }
 
 
 exports.deleteProfile = async(req,res)=>{

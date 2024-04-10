@@ -9,7 +9,7 @@ const Myprofile = () => {
   const navigate = useNavigate();
   return (
     <div className="">
-    <h1 className="mb-14 text-3xl font-calibari font-medium text-richblack-5">
+    <h1 className="mb-10 text-3xl font-calibari font-medium text-richblack-5">
     My Profile
   </h1>
   <div className="flex items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6 px-12">
