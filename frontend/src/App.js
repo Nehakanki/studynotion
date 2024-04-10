@@ -19,6 +19,8 @@ import Myprofile from "../src/components/core/DAshBOard/Myprofile";
 import Dashboard from "./Pages/Dashboard";
 import Settings from './components/core/DAshBOard/Setting/Settings.jsx'
 import EnrolledCourses from "./components/core/DAshBOard/Setting/EnrolledCourses.jsx";
+import CartIndex from "./components/core/DAshBOard/cart/CartIndex.jsx";
+
 
 const App = () => {
  
@@ -112,7 +114,7 @@ const App = () => {
       {
         user?.accountType === ACCOUNT_TYPE.STUDENT && (
           <>
-          {/* <Route path="dashboard/cart" element={<Cart />} /> */}
+          <Route path="dashboard/cart" element={<CartIndex/>} />
           <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} />
           </>
         )
