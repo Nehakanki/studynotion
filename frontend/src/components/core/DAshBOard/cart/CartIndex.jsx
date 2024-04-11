@@ -1,10 +1,10 @@
 import React from 'react'
-import { useDispatch, useSelector } from "react-redux"
+import {useSelector } from "react-redux"
 import RenderCartCourses from './RenderCartCourses'
 import RenderTotalAmount from './RenderTotalAmount'
 
 const CartIndex = () => {
-  const { total, cart, totalItems } = useSelector((state) => state.cart);
+  const { total,  totalItems } = useSelector((state) => state.cart);
 
 
 
